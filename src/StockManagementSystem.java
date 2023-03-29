@@ -264,13 +264,15 @@ public class StockManagementSystem extends javax.swing.JFrame {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-         {
-    String id = idField.getText();
+//         {
+//    String id = idField.getText();
+//
+//    productData.deleteProduct(id);
+//
+//    idField.setText("");
+//}
 
-    productData.deleteProduct(id);
-
-    idField.setText("");
-}
+        ((DefaultTableModel)jTable1.getModel()).removeRow(jTable1.getSelectedRow());
 
     }//GEN-LAST:event_deleteBtnActionPerformed
 
