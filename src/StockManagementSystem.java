@@ -14,6 +14,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 public class StockManagementSystem extends javax.swing.JFrame {
    private ProductData productData; 
     public StockManagementSystem() {
@@ -112,8 +116,9 @@ public class StockManagementSystem extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setText("Stock Management System");
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        jTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,6 +137,11 @@ public class StockManagementSystem extends javax.swing.JFrame {
                 "Product Name", "Product Quantity", "Product Price", "Product ID"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTabbedPane1.addTab("Available Stock", jScrollPane1);
@@ -247,18 +257,19 @@ public class StockManagementSystem extends javax.swing.JFrame {
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
-        {  String id = idField.getText();
-    String name = nameField.getText();
-    int quantity = Integer.parseInt(quantityField.getText());
-    double price = Double.parseDouble(priceField.getText());
+//        {  String id = idField.getText();
+//    String name = nameField.getText();
+//    int quantity = Integer.parseInt(quantityField.getText());
+//    double price = Double.parseDouble(priceField.getText());
+//
+//    productData.editProduct(id, name, quantity, price);
+//
+//    nameField.setText("");
+//    quantityField.setText("");
+//    priceField.setText("");
+//    idField.setText("");
 
-    productData.editProduct(id, name, quantity, price);
 
-    nameField.setText("");
-    quantityField.setText("");
-    priceField.setText("");
-    idField.setText("");
-}
 
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -277,42 +288,42 @@ public class StockManagementSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void sortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortBtnActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    jTable1.setRowSorter(sorter);
-    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-    int columnIndexToSort = 1; // 1 is the column index of Product Quantity
-    sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-    sorter.setSortKeys(sortKeys);
+//        // TODO add your handling code here:
+//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+//    jTable1.setRowSorter(sorter);
+//    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+//    int columnIndexToSort = 1; // 1 is the column index of Product Quantity
+//    sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+//    sorter.setSortKeys(sortKeys);
 
     }//GEN-LAST:event_sortBtnActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        nameField.setText((String) ((DefaultTableModel)jTable1.getModel()).getValueAt(jTable1.getSelectedRow(), 0));
+        quantityField.setText((String) ((DefaultTableModel)jTable1.getModel()).getValueAt(jTable1.getSelectedRow(), 1));
+        priceField.setText((String) ((DefaultTableModel)jTable1.getModel()).getValueAt(jTable1.getSelectedRow(), 2));
+        idField.setText((String) ((DefaultTableModel)jTable1.getModel()).getValueAt(jTable1.getSelectedRow(), 3));
+        
+        
+        System.out.println("fdsaf");
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StockManagementSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StockManagementSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StockManagementSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StockManagementSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+       try {
+           /* Set the Nimbus look and feel */
+           //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+           /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+           * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+           */
+           javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+           Logger.getLogger(StockManagementSystem.class.getName()).log(Level.SEVERE, null, ex);
+       }
+            
         //</editor-fold>
 
         /* Create and display the form */
